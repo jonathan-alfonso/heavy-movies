@@ -1,0 +1,11 @@
+<header class="navbar-container">
+  <nav class="navbar-nav container">
+    <a [routerLink]="'/'" class="flex-start navbar-logo">
+      <h1 class="navbar-title">{{ title }}</h1>
+    </a>
+
+    <div class="navbar-list">
+      <a mat-button [routerLink]="''" [routerLinkActive]="['activated-route']" [routerLinkActiveOptions]="{ exact: true }" aria-label="Accueil">Accueil</a>
+    </div>
+  </nav>
+</header>

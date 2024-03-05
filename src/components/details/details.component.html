@@ -1,0 +1,126 @@
+<div
+  class="landing-page"
+  [style]="'background-image: url(' + landingUrl + movieBackdropPath + ');'"
+>
+  <app-navbar></app-navbar>
+  <div class="content-container">
+    <div class="content-info">
+      <img
+        src="https://image.tmdb.org/t/p/w300_and_h450_bestv2/{{
+          moviePosterPath
+        }}"
+        data-src="https://image.tmdb.org/t/p/w300_and_h450_bestv2/{{
+          moviePosterPath
+        }}"
+        data-srcset="https://image.tmdb.org/t/p/w300_and_h450_bestv2/{{
+          moviePosterPath
+        }} 1x, https://image.tmdb.org/t/p/w600_and_h900_bestv2/{{
+          moviePosterPath
+        }} 2x"
+        srcset="
+          https://image.tmdb.org/t/p/w300_and_h450_bestv2/{{moviePosterPath}} 1x,
+          https://image.tmdb.org/t/p/w600_and_h900_bestv2/{{moviePosterPath}} 2x
+        "
+        data-loaded="true"
+        [alt]="movieTitle"
+      />
+
+      <div class="content-data">
+        <h2>{{ movieTitle }}</h2>
+        <h5 class="original-title">{{ movieOriginalTitle }}</h5>
+        <h3>{{ movieTagline }}</h3>
+
+        <h4>Résumé :</h4>
+        <p>{{ movieOverview }}</p>
+
+        <h4>Catégories :</h4>
+        <div class="categories-container">
+          @for (category of movieGenres; track category) {
+          <button
+            mat-raised-button
+            color="primary"
+            aria-label="Categories"
+            disabled
+          >
+            {{ category }}
+          </button>
+          }
+        </div>
+      </div>
+
+      <div class="videos">
+        <h4>Vidéos :</h4>
+          <div class="videos-container">
+            @for (videos of movieVideos; track videos.id) {
+              <button mat-raised-button color="primary" aria-label="Trailers" (click)="openDialog()" class="play-trailer">
+                <mat-icon>play_arrow</mat-icon>
+                {{ videos.name }}
+              </button>
+            }
+          </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+  <section class="movies-container">
+    
+    <div class="card-tab">
+      <mat-tab-group (selectedTabChange)="tabMoviesChange($event)" [selectedIndex]="moviesTab" mat-stretch-tabs="false" mat-align-tabs="end">
+        @for (tab of movieTabList; track tab) {
+          <mat-tab [label]="tab" class="card-tab">
+            <div class="card-container">
+              @if (moviesTab == 0) {
+                @for (similar of movieSimilar; track similar.id) {
+                  <div class="card">
+                    <a [routerLink]="'/movie/' + similar.id" [title]="similar.title">
+                      <img 
+                      class="card-poster" 
+                      loading="lazy" 
+                      [ngSrc]="posterUrl + similar.poster_path" 
+                      srcset="{{posterUrl + similar.poster_path}} 1x, {{zoomedUrl + similar.poster_path}} 2x"
+                      [alt]="similar.title"
+                      [height]="239"
+                      [width]="159"
+                      />
+                    </a>
+                    <a [routerLink]="'/movie/' + similar.id" [title]="similar.title" class="card-title">
+                      {{ similar.title }}
+                    </a>
+                    <p class="card-date">{{ similar.release_date | date: 'dd/MM/yyyy' }}</p>
+                  </div>
+                }
+              } @else if (moviesTab == 1) {
+                @for (recommendation of movieRecommendations; track recommendation.id) {
+                  <div class="card">
+                    <a [routerLink]="'/movie/' + recommendation.id" [title]="recommendation.title">
+                      <img 
+                      class="card-poster" 
+                      loading="lazy" 
+                      [ngSrc]="posterUrl + recommendation.poster_path" 
+                      srcset="{{posterUrl + recommendation.poster_path}} 1x, {{zoomedUrl + recommendation.poster_path}} 2x"
+                      [alt]="recommendation.title"
+                      [height]="239"
+                      [width]="159"
+                      />
+                    </a>
+                    <a [routerLink]="'/movie/' + recommendation.id" [title]="recommendation.title" class="card-title">
+                      {{ recommendation.title }}
+                    </a>
+                    <p class="card-date">{{ recommendation.release_date | date: 'dd/MM/yyyy' }}</p>
+                  </div>
+                }
+              }
+            </div>
+          </mat-tab>
+        } @empty {
+          Liste vide
+        }
+      </mat-tab-group>
+    </div>
+  </section>
+
+  <app-footer></app-footer>
+</div>
+

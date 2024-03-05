@@ -1,0 +1,48 @@
+.card-tab {
+  margin-bottom: 10px;
+}
+
+.card-container {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  justify-content: start;
+  margin-top: 3rem;
+  width: 80%;
+  margin: auto;
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  width: 159px;
+  margin-top: 100px;
+}
+
+.card-poster {
+  &:hover {
+    transform: scale(1.1);
+  }
+}
+
+.card-title {
+  text-decoration: none;
+  color: #fff;
+  font-weight: bold;
+  margin-top: 10px;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+
+  &:hover {
+    color: #4156c4;
+  }
+}
+
+.card-date {
+  color: #fff;
+}
+
+.btn-rating {
+  top: 20px;
+}

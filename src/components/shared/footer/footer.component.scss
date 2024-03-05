@@ -1,0 +1,35 @@
+.footer-container {
+  background-color: #3f3f3f;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  align-items: center;
+  padding: 30px 0;
+  font-size: 0.8rem;
+  color: #fff;
+}
+
+.footer-text {
+  display: flex;
+}
+
+.footer-name {
+  font-weight: bold;
+}
+
+.footer-social {
+  text-decoration: none;
+  display: flex;
+
+  img {
+    min-width: 2rem;
+    width: 2rem;
+    border-radius: 5px;
+    margin: 5px;
+
+    &:hover {
+      transform: scale(1.1);
+    }
+  }
+}
